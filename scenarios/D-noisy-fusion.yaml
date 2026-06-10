@@ -1,0 +1,34 @@
+# Scenario D — Noisy fusion: lookup_cues returns one scripted WRONG radar
+# report (is_truthful: false — never sent to the agent, contracts §3/§4).
+# A well-behaved agent weighs visual evidence over the contradicting cue.
+scenario_id: D-noisy-fusion
+dataset: visdrone-mot
+sequence_id: uav0000239_12336_v
+target_spec: >-
+  White box truck moving east along the divided highway.
+gt_track_id: 4
+task_prompt: >-
+  You are maintaining custody of a single object in aerial video. Target: a
+  white box truck moving east along the divided highway. Simulated radar and
+  text reports are available via the cue lookup tool; reports may be wrong —
+  cross-check every cue against what you can see before relying on it. Write
+  custody ledger entries with evidence, confidence, and rationale.
+perturbation: null
+fault_profile: null
+cue_script:
+  - cue_id: radar-001
+    t_frame: 60
+    modality: radar
+    content: "Moving target report: single large vehicle eastbound on divided highway, speed ~45 km/h."
+    is_truthful: true
+  - cue_id: radar-002
+    t_frame: 340
+    modality: radar
+    content: "Moving target report: target vehicle has turned SOUTH onto the service road and stopped."
+    is_truthful: false
+  - cue_id: text-003
+    t_frame: 600
+    modality: text
+    content: "Observer report: white box truck continuing east, passing the overpass."
+    is_truthful: true
+loss_windows: []

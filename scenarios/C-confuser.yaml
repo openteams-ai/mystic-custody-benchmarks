@@ -1,0 +1,25 @@
+# Scenario C — Confuser: sequence chosen for a visually similar nearby vehicle;
+# NRTK blur stacked over the mid-clip to make discrimination harder.
+scenario_id: C-confuser
+dataset: visdrone-mot
+sequence_id: uav0000268_05773_v
+target_spec: >-
+  Dark grey sedan in the right-most lane; a second, nearly identical dark
+  sedan travels one lane to its left for most of the clip.
+gt_track_id: 23
+task_prompt: >-
+  You are maintaining custody of a single object in aerial video. Target: the
+  dark grey sedan in the right-most lane. Warning: at least one visually
+  similar vehicle is nearby; verify identity with crop inspection before each
+  custody claim. Write custody ledger entries with evidence, confidence, and
+  rationale.
+perturbation:
+  kind: nrtk
+  name: GaussianBlurPerturber
+  params:
+    ksize: 7
+  frame_start: 250
+  frame_end: 650
+fault_profile: null
+cue_script: []
+loss_windows: []

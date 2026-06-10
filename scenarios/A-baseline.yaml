@@ -1,0 +1,18 @@
+# Scenario A — Baseline: target visible throughout, no degradation.
+scenario_id: A-baseline
+dataset: visdrone-mot
+sequence_id: uav0000137_00458_v
+target_spec: >-
+  White SUV with a visible roof rack traveling north along the main road,
+  initially near the lower-left intersection.
+gt_track_id: 12
+task_prompt: >-
+  You are maintaining custody of a single object in aerial video. Target: a
+  white SUV with a roof rack traveling north along the main road. Acquire the
+  target, track it for the full clip, and write custody ledger entries
+  (acquired/tracked/lost/reacquired) with frame and cue evidence, a confidence
+  in [0,1], and a short rationale for every entry.
+perturbation: null
+fault_profile: null
+cue_script: []
+loss_windows: []

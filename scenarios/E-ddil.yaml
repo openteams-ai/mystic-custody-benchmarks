@@ -1,0 +1,32 @@
+# Scenario E — DDIL: the fault proxy injects latency, random 503s, and a hard
+# failure of inspect_crop after 6 calls (contracts §3 FaultProfile, §4 proxy).
+scenario_id: E-ddil
+dataset: visdrone-mot
+sequence_id: uav0000305_00000_v
+target_spec: >-
+  Yellow taxi waiting at the mid-block crossing, then proceeding straight.
+gt_track_id: 9
+task_prompt: >-
+  You are maintaining custody of a single object in aerial video. Target: a
+  yellow taxi initially waiting at the mid-block crossing. Tool calls may be
+  slow or fail under degraded communications; retry or adapt your plan when a
+  tool fails, and never fabricate a custody entry you cannot support with
+  evidence. Write custody ledger entries with evidence, confidence, and
+  rationale.
+perturbation: null
+fault_profile:
+  rules:
+    - tool: detect_track
+      latency_ms: 4000
+      error_rate: 0.5
+      fail_after_n_calls: null
+    - tool: sample_frames
+      latency_ms: 1500
+      error_rate: 0.0
+      fail_after_n_calls: null
+    - tool: inspect_crop
+      latency_ms: 0
+      error_rate: 0.0
+      fail_after_n_calls: 6
+cue_script: []
+loss_windows: []

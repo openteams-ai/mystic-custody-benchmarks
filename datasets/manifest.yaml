@@ -1,0 +1,45 @@
+# Dataset provenance and licensing for the custody benchmark suite.
+# Addresses RFP data-governance requirements: every dataset used by the
+# harness records its source, license terms, citation, and role.
+datasets:
+  - id: visdrone-mot
+    name: VisDrone2019-MOT (multi-object tracking subset)
+    s3_prefix: s3://custody-demo-data/visdrone-mot/
+    source_url: https://github.com/VisDrone/VisDrone-Dataset
+    license: >-
+      Academic research use only, per the VisDrone team's release terms;
+      commercial use requires permission from the AISKYEYE group (Tianjin
+      University). Redistribution of imagery outside the evaluation
+      environment is not permitted.
+    citation: >-
+      Zhu, P., Wen, L., Du, D., Bian, X., Fan, H., Hu, Q., & Ling, H. (2021).
+      Detection and Tracking Meet Drones Challenge. IEEE Transactions on
+      Pattern Analysis and Machine Intelligence, 44(11), 7380-7399.
+    ground_truth: >-
+      Full multi-object track annotations: per-frame bounding boxes with
+      persistent track IDs (custody ground truth). Loaded via databridge
+      (dataset_format=visdrone) or staged MOTChallenge gt.txt files.
+    used_for: >-
+      All GT-scored custody metrics; scenario suite A-F.
+    sequences_used:
+      - uav0000137_00458_v   # A-baseline
+      - uav0000182_00000_v   # B-temp-loss
+      - uav0000268_05773_v   # C-confuser
+      - uav0000239_12336_v   # D-noisy-fusion
+      - uav0000305_00000_v   # E-ddil
+      - uav0000077_00720_v   # F-adversarial
+  - id: virat-aerial
+    name: VIRAT Video Dataset — aerial collection (Kitware-hosted)
+    s3_prefix: s3://custody-demo-data/virat-aerial/
+    source_url: https://data.kitware.com/#collection/611e77a42fa25629b9daceba
+    license: >-
+      Public release per the VIRAT data release terms (approved for public
+      release; hosted by Kitware). Attribution required.
+    citation: >-
+      Oh, S., et al. (2011). A Large-scale Benchmark Dataset for Event
+      Recognition in Surveillance Video. CVPR 2011.
+    ground_truth: >-
+      None for custody tracks. VIRAT runs are scored by judge rubrics, trace
+      rules, and citation spot-checks only (gt_track_id: null).
+    used_for: >-
+      One curated clip for the live agent demo segment.
