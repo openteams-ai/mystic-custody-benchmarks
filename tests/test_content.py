@@ -65,6 +65,34 @@ def test_rubrics_have_scoring_anchors_and_json_instruction(name: str) -> None:
     assert '"score"' in text and '"reasons"' in text, f"{name}.md must show the required JSON shape"
 
 
+def test_scenario_config_with_explicit_designation_validates() -> None:
+    """ScenarioConfig accepts an explicit designation block (VIRAT-style pin).
+
+    VisDrone scenarios rely on GT-derived designation (designation=None in YAML);
+    VIRAT scenarios (no GT) will pin it manually.  This test pins the schema
+    accepts an explicit designation so future VIRAT scenarios can use it.
+    """
+    from checkmaite_plugin_custody.custody_schemas import Designation
+
+    cfg = ScenarioConfig(
+        scenario_id="A-baseline",
+        dataset="visdrone-mot",
+        sequence_id="uav0000137_00458_v",
+        target_spec="white SUV travelling north",
+        gt_track_id=12,
+        task_prompt="Maintain custody of the white SUV.",
+        designation=Designation(frame=0, x=25.0, y=40.0),
+    )
+    assert cfg.designation is not None
+    assert cfg.designation.frame == 0
+    assert cfg.designation.x == 25.0
+    assert cfg.designation.y == 40.0
+
+    # Round-trip via model_validate to confirm full serialization works
+    again = ScenarioConfig.model_validate(cfg.model_dump())
+    assert again.designation == cfg.designation
+
+
 def test_manifest_records_provenance_and_license() -> None:
     manifest = yaml.safe_load((ROOT / "datasets" / "manifest.yaml").read_text())
     ids = {d["id"] for d in manifest["datasets"]}
