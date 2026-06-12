@@ -96,7 +96,7 @@ def test_scenario_config_with_explicit_designation_validates() -> None:
 def test_manifest_records_provenance_and_license() -> None:
     manifest = yaml.safe_load((ROOT / "datasets" / "manifest.yaml").read_text())
     ids = {d["id"] for d in manifest["datasets"]}
-    assert ids == {"visdrone-mot", "virat-aerial"}
+    assert ids == {"visdrone-mot", "virat-aerial", "seadronessee"}
     for dataset in manifest["datasets"]:
         for field in ("name", "s3_prefix", "source_url", "license", "citation", "ground_truth", "used_for"):
             assert dataset.get(field), f"{dataset['id']} missing {field}"

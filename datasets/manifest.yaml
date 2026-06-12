@@ -27,7 +27,7 @@ datasets:
       - uav0000268_05773_v   # C-confuser
       - uav0000239_12336_v   # D-noisy-fusion
       - uav0000305_00000_v   # E-ddil
-      - uav0000077_00720_v   # F-adversarial
+    # F-adversarial moved to the maritime SeaDronesSee sequence (see below).
   - id: virat-aerial
     name: VIRAT Video Dataset — aerial collection (Kitware-hosted)
     s3_prefix: s3://custody-demo-data/virat-aerial/
@@ -43,3 +43,25 @@ datasets:
       rules, and citation spot-checks only (gt_track_id: null).
     used_for: >-
       One curated clip for the live agent demo segment.
+  - id: seadronessee
+    name: SeaDronesSee — maritime search-and-rescue UAV benchmark (MOT subset)
+    s3_prefix: s3://custody-demo-data/seadronessee/
+    source_url: https://github.com/Ben93kie/SeaDronesSee
+    license: >-
+      Released for academic and non-commercial research use, per the
+      SeaDronesSee authors' terms; attribution required. Redistribution of
+      imagery outside the evaluation environment is not permitted.
+    citation: >-
+      Varga, L. A., Kiefer, B., Messmer, M., & Zell, A. (2022). SeaDronesSee:
+      A Maritime Benchmark for Detecting Humans in Open Water. IEEE/CVF Winter
+      Conference on Applications of Computer Vision (WACV), 2260-2270.
+    ground_truth: >-
+      Per-frame bounding boxes with persistent track IDs in MOTChallenge
+      gt.txt form, staged as <prefix>/<seq>.gt.txt alongside the mp4 and a
+      per-frame telemetry.json. Object classes: 1=swimmer, 2=boat, 3=jetski,
+      4=life-saving-appliance, 5=buoy.
+    used_for: >-
+      Maritime adversarial custody scenario F (swimmer custody under jet-ski
+      confusers, a visual perturbation, and a prompt-injection cue).
+    sequences_used:
+      - val-06-DJI_0032      # F-adversarial (swimmer = track 309)
