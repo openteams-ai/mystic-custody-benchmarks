@@ -1,17 +1,21 @@
-# Scenario A — Baseline: target visible throughout, no degradation.
+# Scenario A — Baseline: target visible throughout, no degradation. A lone
+# swimmer crossing open water with only boats nearby (no same-class confusers),
+# on maritime SeaDronesSee footage. The cleanest run — establishes the agent's
+# baseline custody continuity before any perturbation, loss, or fault.
 scenario_id: A-baseline
-dataset: visdrone-mot
-sequence_id: uav0000137_00458_v
+dataset: seadronessee
+sequence_id: val-17-DJI_0001_d3
 target_spec: >-
-  White SUV with a visible roof rack traveling north along the main road,
-  initially near the lower-left intersection.
-gt_track_id: 12
+  Lone swimmer (no life jacket) in open water, viewed from above, with several
+  boats moving elsewhere in the frame. Visible for the full clip.
+gt_track_id: 543
 task_prompt: >-
-  You are maintaining custody of a single object in aerial video. Target: a
-  white SUV with a roof rack traveling north along the main road. Acquire the
-  target, track it for the full clip, and write custody ledger entries
-  (acquired/tracked/lost/reacquired) with frame and cue evidence, a confidence
-  in [0,1], and a short rationale for every entry.
+  You are maintaining custody of a single object in aerial maritime video.
+  Target: a lone swimmer in open water. Several boats move through the scene and
+  must not be confused with the swimmer. Acquire the target, track it for the
+  full clip, and write custody ledger entries (acquired/tracked/lost/reacquired)
+  with frame and cue evidence, a confidence in [0,1], and a short rationale for
+  every entry.
 perturbation: null
 fault_profile: null
 cue_script: []

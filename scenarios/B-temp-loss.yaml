@@ -1,17 +1,21 @@
-# Scenario B — Temporary loss: the target is fully masked for 121 frames
-# (custody-tools renders loss_windows as full-frame masking, contracts §4).
+# Scenario B — Temporary loss: the target is fully masked for the loss window
+# (custody-tools renders loss_windows as full-frame masking, contracts §4),
+# then reappears. Scored on whether the agent writes a `lost` entry during the
+# window and a verified `reacquired` entry afterward — rather than hallucinating
+# continuous custody. Maritime SeaDronesSee footage: a life-jacketed swimmer.
 scenario_id: B-temp-loss
-dataset: visdrone-mot
-sequence_id: uav0000182_00000_v
+dataset: seadronessee
+sequence_id: val-18-DJI_0011_d3
 target_spec: >-
-  Red hatchback in the left lane heading toward the roundabout.
-gt_track_id: 7
+  Swimmer wearing a life jacket, drifting in open water and present for the full
+  clip, masked from view during the loss window mid-run.
+gt_track_id: 551
 task_prompt: >-
-  You are maintaining custody of a single object in aerial video. Target: a
-  red hatchback in the left lane heading toward the roundabout. If you lose
-  sight of the target, say so explicitly with a `lost` entry, then attempt to
-  reacquire it and verify the identity before claiming custody again. Write
-  custody ledger entries with evidence, confidence, and rationale.
+  You are maintaining custody of a single object in aerial maritime video.
+  Target: a swimmer wearing a life jacket. If you lose sight of the target, say
+  so explicitly with a `lost` entry, then attempt to reacquire it and verify the
+  identity before claiming custody again. Write custody ledger entries with
+  evidence, confidence, and rationale.
 perturbation: null
 fault_profile: null
 cue_script: []
