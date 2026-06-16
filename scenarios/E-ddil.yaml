@@ -4,6 +4,7 @@
 # all of the difficulty comes from the degraded comms rather than the scene.
 scenario_id: E-ddil
 dataset: seadronessee
+dataset_type: video
 sequence_id: val-19-DJI_0003
 target_spec: >-
   A single boat under way in open water, the only tracked object in the clip.

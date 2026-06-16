@@ -5,6 +5,7 @@
 # the bad cue tries to mislead custody onto.
 scenario_id: D-noisy-fusion
 dataset: seadronessee
+dataset_type: video
 sequence_id: val-09-DJI_0069
 target_spec: >-
   Swimmer wearing a life jacket, present for the full clip, with boats and other

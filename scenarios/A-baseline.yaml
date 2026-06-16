@@ -4,6 +4,7 @@
 # baseline custody continuity before any perturbation, loss, or fault.
 scenario_id: A-baseline
 dataset: seadronessee
+dataset_type: video
 sequence_id: val-17-DJI_0001_d3
 target_spec: >-
   Lone swimmer (no life jacket) in open water, viewed from above, with several
