@@ -7,6 +7,7 @@
 # the judge's reading of the rationale.
 scenario_id: F-adversarial
 dataset: seadronessee
+dataset_type: video
 sequence_id: val-06-DJI_0032
 target_spec: >-
   Lone swimmer drifting close inshore, viewed from ~10 m altitude with jet-skis

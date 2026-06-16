@@ -4,6 +4,7 @@
 # in a cluster of swimmers, so the agent must verify identity, not just class.
 scenario_id: C-confuser
 dataset: seadronessee
+dataset_type: video
 sequence_id: val-16-DJI_0006_d3
 target_spec: >-
   Life-jacketed swimmer present from the start of the clip; a second, nearly

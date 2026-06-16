@@ -5,6 +5,7 @@
 # continuous custody. Maritime SeaDronesSee footage: a life-jacketed swimmer.
 scenario_id: B-temp-loss
 dataset: seadronessee
+dataset_type: video
 sequence_id: val-18-DJI_0011_d3
 target_spec: >-
   Swimmer wearing a life jacket, drifting in open water and present for the full
