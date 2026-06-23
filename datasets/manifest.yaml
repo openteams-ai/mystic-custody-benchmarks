@@ -58,10 +58,16 @@ datasets:
     ground_truth: >-
       Per-frame bounding boxes with persistent track IDs in MOTChallenge
       gt.txt form, staged as <prefix>/<seq>.gt.txt alongside the mp4 and a
-      per-frame telemetry.json. Object classes: 1=swimmer, 2=boat, 3=jetski,
-      4=life-saving-appliance, 5=buoy.
+      per-frame telemetry.json. Object classes as used by the staged GT
+      (confirmed against the val-16 footage): 1=swimmer (no life jacket),
+      2=life-jacketed swimmer, 3=boat.
     used_for: >-
-      Maritime adversarial custody scenario F (swimmer custody under jet-ski
-      confusers, a visual perturbation, and a prompt-injection cue).
+      All maritime custody scenarios — the suite (A-F) was migrated to staged
+      SeaDronesSee sequences. GT-scored via the per-sequence gt.txt.
     sequences_used:
-      - val-06-DJI_0032      # F-adversarial (swimmer = track 309)
+      - val-17-DJI_0001_d3   # A-baseline     (swimmer = track 543)
+      - val-18-DJI_0011_d3   # B-temp-loss    (life-jacketed swimmer = track 551)
+      - val-16-DJI_0006_d3   # C-confuser     (life-jacketed swimmer = track 508; look-alike = 502)
+      - val-09-DJI_0069      # D-noisy-fusion (life-jacketed swimmer = track 389)
+      - val-19-DJI_0003      # E-ddil         (boat = track 611)
+      - val-06-DJI_0032      # F-adversarial  (swimmer = track 309)
