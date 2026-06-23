@@ -20,4 +20,4 @@ perturbation: null
 fault_profile: null
 cue_script: []
 loss_windows:
-  - [400, 700]
+  - [400, 540]
