@@ -1,7 +1,8 @@
-# Scenario E — DDIL: the fault proxy injects latency, random 503s, and a hard
-# failure of inspect_crop after 6 calls (contracts §3 FaultProfile, §4 proxy).
-# A lone boat on maritime SeaDronesSee footage — a single unambiguous target, so
-# all of the difficulty comes from the degraded comms rather than the scene.
+# Scenario E — DDIL: the fault proxy injects jittered latency, BURSTY 503s
+# (correlated outages, not independent per-call drops), and a hard failure of
+# inspect_crop after 6 calls (contracts §3 FaultProfile, §4 proxy). A lone boat
+# on maritime SeaDronesSee footage — a single unambiguous target, so all of the
+# difficulty comes from the degraded comms rather than the scene.
 scenario_id: E-ddil
 dataset: seadronessee
 sequence_id: val-19-DJI_0003
@@ -17,12 +18,17 @@ task_prompt: >-
 perturbation: null
 fault_profile:
   rules:
+    # Bursty, jittered outages: when a 503 fires it lasts ~3 consecutive calls
+    # (a sustained outage), with ±1.5s latency jitter on top of the 4s base.
     - tool: detect_track
       latency_ms: 4000
-      error_rate: 0.5
+      latency_jitter_ms: 1500
+      error_rate: 0.4
+      burst_len: 3
       fail_after_n_calls: null
     - tool: sample_frames
       latency_ms: 1500
+      latency_jitter_ms: 500
       error_rate: 0.0
       fail_after_n_calls: null
     - tool: inspect_crop
