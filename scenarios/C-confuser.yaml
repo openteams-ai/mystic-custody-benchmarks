@@ -1,22 +1,27 @@
-# Scenario C — Confuser: sequence chosen for a visually similar same-class
-# neighbor; NRTK blur stacked over the mid-clip to make discrimination harder.
-# Maritime SeaDronesSee footage: two life-jacketed swimmers drift close together
-# in a cluster of swimmers, so the agent must verify identity, not just class.
+# Scenario C — Confuser: the scene holds two near-identical red-life-jacketed
+# swimmers (the target 508 and one look-alike, 502) plus other swimmers and
+# boats; NRTK blur over the mid-clip degrades discrimination further. The two
+# look-alikes stay spatially separated (they never cross), so appearance alone
+# cannot tell them apart — the agent must hold the DESIGNATED individual via
+# positional/heading continuity, not just class.
 scenario_id: C-confuser
 dataset: seadronessee
 sequence_id: val-16-DJI_0006_d3
 target_spec: >-
-  Life-jacketed swimmer present from the start of the clip; a second, nearly
-  identical life-jacketed swimmer drifts close by for most of the run, amid a
-  cluster of other swimmers.
+  Red-life-jacketed swimmer present from the start of the clip; a second, nearly
+  identical red-life-jacketed swimmer is also in the scene throughout, amid other
+  swimmers and boats. The two look-alikes stay apart but are visually
+  indistinguishable.
 gt_track_id: 508
 task_prompt: >-
   You are maintaining custody of a single object in aerial maritime video.
-  Target: a swimmer wearing a life jacket, the one present from the opening of
-  the clip. Warning: at least one visually similar life-jacketed swimmer is
-  nearby and other swimmers are in the water; verify identity with crop
-  inspection before each custody claim rather than relying on class alone. Write
-  custody ledger entries with evidence, confidence, and rationale.
+  Target: the red-life-jacketed swimmer designated at the start of the clip.
+  Warning: a second, near-identical red-life-jacketed swimmer is also present, so
+  appearance and class alone cannot distinguish them — keep custody on the
+  DESIGNATED individual by tracking its position and heading continuously. Use
+  crop inspection to confirm it is still a life-jacketed swimmer, but rely on
+  positional continuity to pick the right one. Write custody ledger entries with
+  evidence, confidence, and rationale.
 perturbation:
   kind: nrtk
   name: GaussianBlurPerturber
